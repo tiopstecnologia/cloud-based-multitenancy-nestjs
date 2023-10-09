@@ -1,5 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-import { IsNumber } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 @Exclude()
 export class ReadUserDto {
@@ -10,4 +10,8 @@ export class ReadUserDto {
   @IsNumber()
   @Expose()
   readonly username: string;
+
+  @IsString()
+  @Expose()
+  readonly tenantCode: string;
 }

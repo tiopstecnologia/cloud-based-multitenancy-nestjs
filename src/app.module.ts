@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 @Module({
   imports: [
     TenancyModule,
+    UserModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
@@ -24,8 +25,7 @@ import { UserModule } from './user/user.module';
           ssl: true,
         } as ConnectionOptions;
       },
-    }),
-    UserModule,
+    })
   ],
   controllers: [],
   providers: [],

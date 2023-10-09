@@ -15,7 +15,7 @@ import { User } from 'src/user/user.entity';
 import { TenantProvider } from './tenancy.provider';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tenancy])],
+  imports: [TypeOrmModule.forFeature([Tenancy,User])],
   providers: [TenancyService, TenantProvider],
   exports: [TenantProvider],
   controllers: [TenancyController],
@@ -30,8 +30,9 @@ export class TenancyModule {
   configure(consumer: MiddlewareConsumer): void {
     consumer
       .apply(async (req: Request, res: Response, next: NextFunction) => {
-        const name: string = req.params['tenant'];
-        const tenant: Tenancy = await this.tenantService.findOne(name);
+        //const name: string = req.params['tenant'];
+        const nameTenant: string = 'saasadmin';
+        const tenant: Tenancy = await this.tenantService.findOne(nameTenant);
 
         if (!tenant) {
           throw new BadRequestException(
@@ -42,7 +43,7 @@ export class TenancyModule {
 
         try {
           getConnection(tenant.tenantName);
-          next();
+          next(); 
         } catch (e) {
           await this.connection.query(
             `CREATE DATABASE IF NOT EXISTS ${tenant.tenantName}`,
@@ -71,7 +72,8 @@ export class TenancyModule {
           }
         }
       })
-      .exclude({ path: '/api/tenants', method: RequestMethod.ALL })
+      .exclude({ path: '/api/tenants', method: RequestMethod.ALL },
+               { path: '/api/users', method: RequestMethod.ALL })
       .forRoutes('*');
   }
 }
