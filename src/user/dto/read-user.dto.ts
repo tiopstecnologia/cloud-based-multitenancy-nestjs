@@ -9,5 +9,5 @@ export class ReadUserDto {
 
   @IsNumber()
   @Expose()
-  readonly name: string;
+  readonly username: string;
 }

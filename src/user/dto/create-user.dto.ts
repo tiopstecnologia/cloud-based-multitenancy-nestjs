@@ -5,5 +5,5 @@ import { IsNumber, IsString } from 'class-validator';
 export class CreateUserDto {
   @IsString()
   @Expose()
-  readonly name: string;
+  readonly username: string;
 }

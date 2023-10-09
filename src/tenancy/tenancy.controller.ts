@@ -14,6 +14,7 @@ export class TenancyController {
 
   @Post()
   create(@Body() tenant: CreateTenantDto): Promise<ReadTenantDto> {
+    console.log(tenant)
     return this.tenantService.create(tenant);
   }
 }

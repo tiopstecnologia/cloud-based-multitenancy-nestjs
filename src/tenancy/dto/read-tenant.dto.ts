@@ -9,5 +9,5 @@ export class ReadTenantDto {
 
   @IsString()
   @Expose()
-  readonly name: string;
+  readonly tenantName: string;
 }

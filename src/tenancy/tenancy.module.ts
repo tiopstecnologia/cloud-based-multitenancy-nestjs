@@ -41,21 +41,21 @@ export class TenancyModule {
         }
 
         try {
-          getConnection(tenant.name);
+          getConnection(tenant.tenantName);
           next();
         } catch (e) {
           await this.connection.query(
-            `CREATE DATABASE IF NOT EXISTS ${tenant.name}`,
+            `CREATE DATABASE IF NOT EXISTS ${tenant.tenantName}`,
           );
 
           const createdConnection: Connection = await createConnection({
-            name: tenant.name,
+            name: tenant.tenantName,
             type: 'mysql',
             host: this.configService.get('DB_HOST'),
             port: +this.configService.get('DB_PORT'),
             username: this.configService.get('DB_USER'),
             password: this.configService.get('DB_PASSWORD'),
-            database: tenant.name,
+            database: tenant.tenantName,
             entities: [User],
             ssl: true,
             synchronize: true,

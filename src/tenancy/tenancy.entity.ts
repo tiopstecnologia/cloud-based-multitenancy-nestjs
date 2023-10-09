@@ -6,5 +6,5 @@ export class Tenancy {
   id: number;
 
   @Column({ unique: true })
-  name: string;
+  tenantName: string;
 }

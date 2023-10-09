@@ -15,8 +15,8 @@ export const TenantProvider: Provider = {
     const name: string = req.params['tenant'];
     const tenant: Tenancy = await connection
       .getRepository(Tenancy)
-      .findOne({ where: { name } });
+      .findOne({ where: { tenantName : name } });
 
-    return getConnection(tenant.name);
+    return getConnection(tenant.tenantName);
   },
 };

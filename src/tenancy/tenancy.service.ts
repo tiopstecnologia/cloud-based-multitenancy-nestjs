@@ -20,12 +20,12 @@ export class TenancyService {
   }
 
   async findOne(name: string) {
-    return await this.tenantRepository.findOne({ name });
+    return await this.tenantRepository.findOne({ tenantName : name});
   }
 
   async create(tenant: CreateTenantDto): Promise<ReadTenantDto> {
+    console.log(tenant)
     const createdTenant = await this.tenantRepository.save(tenant);
-
     return plainToClass(ReadTenantDto, createdTenant);
   }
 }
