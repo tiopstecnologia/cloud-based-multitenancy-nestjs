@@ -15,7 +15,7 @@ export class UserController {
   @Post()
   async create(@Body() user: CreateUserDto, @Param('tenant') tenant): Promise<ReadUserDto> {
     console.log("data {} {}", user, tenant)
-    user.tenantCode = tenant;
-    return this.userService.create(user);
+    
+    return this.userService.create(user, tenant);
   }
 }

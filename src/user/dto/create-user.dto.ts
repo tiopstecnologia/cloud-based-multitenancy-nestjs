@@ -7,7 +7,7 @@ export class CreateUserDto {
   @IsString()
   @Expose()
   readonly username: string;
-
+  @Expose()
   @Column()
   tenantCode: string;
 }

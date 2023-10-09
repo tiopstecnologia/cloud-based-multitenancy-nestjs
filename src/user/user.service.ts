@@ -16,13 +16,12 @@ export class UserService {
 
   async findAll(): Promise<ReadUserDto[]> {
     const users = await this.userRepository.find();
-
     return users.map(user => plainToClass(ReadUserDto, user));
   }
 
-  async create(user: CreateUserDto): Promise<ReadUserDto> {
+  async create(user: CreateUserDto, tenant: string): Promise<ReadUserDto> {
+    user.tenantCode = tenant;
     const createdUser = await this.userRepository.save(user);
-
     return plainToClass(ReadUserDto, createdUser);
   }
 }
